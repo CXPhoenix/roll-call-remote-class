@@ -1,0 +1,4 @@
+node_modules
+firebase.config.js
+assets
+./public/js/*
