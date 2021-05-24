@@ -2,9 +2,7 @@
 > Author: CXPhoenix
 
 ## Description
-> The project develop for remote education using firebase service.
-> 
-> 
+#### The project develop for remote education using firebase service.
 
 * version: 0.1.0
 
