@@ -37,7 +37,7 @@ if (!rollCallCourseId) {
             comfirm: '我知道了'
         })
         .then(
-            window.location.href = 'http://www.fhsh.tp.edu.tw'
+            window.location.href = 'https://www.google.com'
         )
 }
 
@@ -146,6 +146,6 @@ onMount('studentRollCall').then(() => {
 onMount('rollCallSuccess').then(() => {
     const successBtn = document.querySelector('#successBtn')
     successBtn.addEventListener('click', () => {
-        window.location.href = 'http://www.fhsh.tp.edu.tw'
+        window.location.href = 'https://www.google.com'
     })
 })
