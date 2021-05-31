@@ -14,6 +14,7 @@
 
 * Build a file "firebaseConfig.js" in srcJs/functions/
 * Write the firebaseConfig
+
 '''
 export const firebaseConfig = {
     apiKey: [Your API Key],
