@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <style>
+        #coursesListLoader.lds-dual-ring {
+            display: flex;
+            width: 80px;
+            height: 80px;
+        }
+
+        .lds-dual-ring:after {
+            content: " ";
+            display: block;
+            width: 64px;
+            height: 64px;
+            margin: 8px;
+            border-radius: 50%;
+            border: 6px solid #000;
+            border-color: #000 transparent #000 transparent;
+            animation: lds-dual-ring 1.2s linear infinite;
+        }
+
+        @keyframes lds-dual-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <title>課程名單</title>
+</head>
+
+<body>
+    <header class="bg-primary mb-4">
+        <div class="container text-center p-3">
+            <span class="text-white display-3 fw-bold">電子點名系統</span>
+        </div>
+    </header>
+
+    <section class="mt-3 mb-5">
+        <div class="container">
+            <div class="mb-3 text-center fs-4">
+                歡迎回來<span class="d-none d-md-inline">，&nbsp;</span><span
+                    class="d-inline d-md-none mt-0"><br /></span><span id="userName"></span>&nbsp;老師&nbsp;&nbsp;<span
+                    id="logoutbtn"style="font-size: 1vw; cursor: pointer; text-decoration: underline;">登出</span>
+            </div>
+            <div id="coursesListLoader" class="justify-content-center" style="display:flex; margin-top: 10vh;">
+                <div class="lds-dual-ring"></div>
+            </div>
+            <div id="courseList"
+                class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-start align-items-center g-4 mt-1" style="margin-bottom: 10vh;">
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-light fixed-bottom mt-5">
+        <div class="container text-center p-1">
+            <span>Power By FHSH IT <span id="tmpLogout">dept.</span></span>
+        </div>
+    </footer>
+    <script src="./js/css.js"></script>
+    <script src="./js/classlist.js"></script>
+</body>
+
+</html>

@@ -5,18 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>課程點名用QRcode</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
 </head>
 <body>
+    <header class="bg-primary mb-4">
+        <div class="container text-center p-3">
+            <span class="text-white display-3 fw-bold">電子點名系統</span>
+        </div>
+    </header>
+
     <section class="mb-5">
-        <div class="container text-center mb-2">
-            <div class="w-50 mx-auto" style="margin-top: 10vh">
+        <div class="container text-center">
+            <span class="fs-4 mb-2">請讓學生掃描下方 QR code 或是 複製下方連結傳給學生進行點名</span>
+            <div class="mx-auto mt-5">
+                <img id="rollcall" src="#" alt="" />
+            </div>
+            <div class="w-50 mx-auto" style="margin-top: 5vh">
                 <div class="input-group mb-3">
                     <input id="href" type="text" class="form-control" value="#" readonly/>
                     <button class="btn btn-outline-dark" type="button" id="copy">複製&nbsp;&nbsp;<i class="far fa-copy"></i></button>
                   </div>
-            </div>
-            <div class="mx-auto mt-5">
-                <img id="rollcall" src="#" alt="" />
             </div>
         </div>
     </section>
@@ -25,7 +33,7 @@
             <span style="font-size: 1vw;">Power By FHSH IT-dept.</span>
         </div>
     </footer>
-    <script src="./js/style.js"></script>
+    <script src="./js/css.js"></script>
     <script>
         const href = document.querySelector('#href')
         const copyBtn = document.querySelector('#copy')
@@ -42,14 +50,19 @@
             })
         })
         window.addEventListener('load', () => {
+            // now I use the qrcode generator api
+            // need to change to the local generator
             const qrcodeHref = window.location.search.split('?')[1].split('-')
             const baseUrl = 'http://api.qrserver.com/v1/create-qr-code/?'
-            const url = 'http://' + window.location.host + '/public/#/'
-            let data = url + qrcodeHref[0] + '/' + qrcodeHref[1]
-            if (qrcodeHref.length === 3) {
-                data += '/end'
+            const url = 'http://' + window.location.host + '/#'
+            let data = url + qrcodeHref[0] + '/' + qrcodeHref[1] + '/' + qrcodeHref[2]
+            let theWidth = window.innerWidth - 50
+            if (theWidth > 990) {
+                theWidth = 990
+            } else if (theWidth < 100) {
+                theWidth = 100
             }
-            const size = (window.innerWidth-50) + 'x' + (window.innerWidth-50)
+            const size = String(theWidth) + 'x' + String(theWidth)
             const api = baseUrl + 'data=' + data + "&size=" + size
             href.value = data
             qrcode.src = api
