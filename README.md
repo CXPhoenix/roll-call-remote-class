@@ -10,6 +10,22 @@
 ## Project Setting
     npm install
 
+## Firebase Config Setting
+
+* Build a file: firebaseConfig.js
+* Write the firebaseConfig
+'''
+export const firebaseConfig = {
+    apiKey: [Your API Key],
+    authDomain: [Your Auth Domain],
+    projectId: [Your firebase project id],
+    storageBucket: [Your storage bucket code],
+    messagingSenderId: [Your messaging sender id],
+    appId: [Your app id],
+    measurementId: [Your measurement id]
+};
+'''
+
 ## Compiles for development
 webpack/development
 
