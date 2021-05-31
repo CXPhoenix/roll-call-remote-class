@@ -1,4 +1,5 @@
 node_modules
-firebase.config.js
+firebaseConfig.js
 assets
-./public/js/*
+js/
+css/
