@@ -29,13 +29,13 @@ export const firebaseConfig = {
 ## Compiles for development
 webpack/development
 
-    npm run build-js:dev
+    npm run build-dev
 
 webpack/dev-watch
 
-    npm run build-js:dev-watch
+    npm run build-dev:watch
 
 ## Compiles for Production
 webpack/production
 
-    npm run build-js
+    npm run build
