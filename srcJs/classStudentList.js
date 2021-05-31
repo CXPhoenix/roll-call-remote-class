@@ -132,7 +132,7 @@ courseStart.addEventListener('click', function () {
         const showTime = checkTimeFormate(nowTime.getHours()) + ' : ' + checkTimeFormate(nowTime.getMinutes())
         const rollCallNow = confirm(['現在時間', showDate + "  " + showTime, '是否確認要進行【上課】點名？'].join('\n'))
         if (rollCallNow) {
-            const path = '/roll-call-link.html?' + urlKey(true, timeStamp)
+            const path = './roll-call-link.html?' + urlKey(true, timeStamp)
             // setCourseState(courseId, true)
             setLastRollCall(courseId, timeStamp)
             createRollCall(window.sessionStorage.getItem('courseId'), timeStamp, parseInt(rollCallTimeOut.value))

@@ -54,7 +54,7 @@
             // need to change to the local generator
             const qrcodeHref = window.location.search.split('?')[1].split('-')
             const baseUrl = 'http://api.qrserver.com/v1/create-qr-code/?'
-            const url = 'http://' + window.location.host + '/#'
+            const url = 'http://' + window.location.host + '/' + window.location.pathname.split('/')[1] + '/#'
             let data = url + qrcodeHref[0] + '/' + qrcodeHref[1] + '/' + qrcodeHref[2]
             let theWidth = window.innerWidth - 50
             if (theWidth > 990) {
