@@ -15,7 +15,7 @@
 * Build a file "firebaseConfig.js" in srcJs/functions/
 * Write the firebaseConfig
 
-'''
+```
 export const firebaseConfig = {
     apiKey: [Your API Key],
     authDomain: [Your Auth Domain],
@@ -25,7 +25,7 @@ export const firebaseConfig = {
     appId: [Your app id],
     measurementId: [Your measurement id]
 };
-'''
+```
 
 ## Compiles for development
 webpack/development
