@@ -12,7 +12,7 @@
 
 ## Firebase Config Setting
 
-* Build a file: firebaseConfig.js
+* Build a file "firebaseConfig.js" in srcJs/functions/
 * Write the firebaseConfig
 '''
 export const firebaseConfig = {
