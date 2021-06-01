@@ -39,15 +39,7 @@
         const copyBtn = document.querySelector('#copy')
         const qrcode = document.querySelector('#rollcall')
         copyBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(href.value)
-            navigator.clipboard.readText().then((text) => {
-                if (text === href.value) {
-                    copyBtn.classList.add('btn-success')
-                    copyBtn.classList.remove('btn-outline-secondary')
-                    copyBtn.classList.add('text-white')
-                    copyBtn.innerHTML = '複製成功&nbsp;&nbsp;<i class="fas fa-copy"></i>'
-                }
-            })
+            copyText(href)
         })
         window.addEventListener('load', () => {
             // now I use the qrcode generator api
@@ -67,6 +59,33 @@
             href.value = data
             qrcode.src = api
         })
+
+        //use navigator clipboard
+        function copyToClipboard(inputElement) {
+            const text = inputElement.value
+            navigator.clipboard.writeText(text).then(() => {
+                navigator.clipboard.readText().then((text) => {
+                    if (text === href.value) {
+                        copyBtn.classList.add('btn-success')
+                        copyBtn.classList.remove('btn-outline-secondary')
+                        copyBtn.classList.add('text-white')
+                        copyBtn.innerHTML = '複製成功&nbsp;&nbsp;<i class="fas fa-copy"></i>'
+                    }
+                })
+            })
+        }
+
+        // use the old, obsolete feature: document.execCommand()
+        function copyText(inputElement) {
+            const range = document.createRange()
+            range.selectNode(inputElement)
+            window.getSelection().addRange(range)
+            document.execCommand('copy')
+            copyBtn.classList.add('btn-success')
+            copyBtn.classList.remove('btn-outline-secondary')
+            copyBtn.classList.add('text-white')
+            copyBtn.innerHTML = '複製成功&nbsp;&nbsp;<i class="fas fa-copy"></i>'
+        }
     </script>
 </body>
 </html>
