@@ -7,7 +7,7 @@ import {
 // init page element
 const loginBtn = document.querySelector('#login')
 const authSelect = document.querySelector('#authSelect')
-const loginBtnArea = document.querySelector('#isLogin')
+const tipArea = document.querySelector('#tips')
 
 // google login init
 const google = new auth.GoogleAuthProvider
@@ -20,7 +20,7 @@ window.addEventListener('load', () => {
     console.log('load')
     if (checkSearch()) {
         authSelect.style.display = 'none'
-        setTips(loginBtnArea, '請使用已加入課程的帳號進行登入點名！')
+        setTips(tipArea, '請使用已加入課程的帳號進行登入點名！')
     } else {
         google.addScope('https://www.googleapis.com/auth/classroom.courses.readonly')
         google.addScope('https://www.googleapis.com/auth/classroom.rosters.readonly')
@@ -33,7 +33,7 @@ window.addEventListener('load', () => {
 // check the url hash for deciding the action
 loginBtn.addEventListener('click', () => {
     if (checkSearch()) {
-        storageSearch(window.location.Search)
+        storageSearch(window.location.search)
         GoogleLogin('./roll-call.html')
     } else if (authSelect.value === '請問你的身份？') {
         alert('請一定要選擇一個身份喔！')
@@ -75,12 +75,13 @@ function storageSearch(urlSearch) {
 
 function setTips(parentNode, tipsText) {
     const tipArea = document.createElement('div')
-    tipArea.className = 'text-center mt-1 mb-3'
-    
+    tipArea.className = 'text-center'
+    tipArea.style.marginTop = '5vh'
+
     const tipSpan = document.createElement('span')
-    tipSpan.className = 'border border-danger border-3 m-2 p-2 fs-4'
+    tipSpan.className = 'border border-secondary border-3 m-2 p-2 fs-4'
     tipSpan.innerText = tipsText
-    
+
     tipArea.appendChild(tipSpan)
     parentNode.appendChild(tipArea)
 }
