@@ -4,7 +4,7 @@
 ## Description
 #### The project develop for remote education using firebase service.
 
-* version: 2.0.0
+* version: 2.2.0
 * Licence: GNU GENERAL PUBLIC LICENSE v3.0
 
 ## Project Setting
@@ -14,7 +14,8 @@
 
 * Build a file "firebaseConfig.js" in srcJs/functions/
 * Write the firebaseConfig
-'''
+
+```
 export const firebaseConfig = {
     apiKey: [Your API Key],
     authDomain: [Your Auth Domain],
@@ -24,7 +25,7 @@ export const firebaseConfig = {
     appId: [Your app id],
     measurementId: [Your measurement id]
 };
-'''
+```
 
 ## Compiles for development
 webpack/development
