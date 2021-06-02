@@ -16,8 +16,21 @@ const google = new auth.GoogleAuthProvider
 // google.addScope('https://www.googleapis.com/auth/classroom.profile.emails')
 
 // on load event
+window.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM Loaded')
+    if (checkSearch()) {
+        authSelect.style.display = 'none'
+        setTips(tipArea, '請使用已加入課程的帳號進行登入點名！')
+        return
+    }
+    google.addScope('https://www.googleapis.com/auth/classroom.courses.readonly')
+    google.addScope('https://www.googleapis.com/auth/classroom.rosters.readonly')
+    google.addScope('https://www.googleapis.com/auth/classroom.profile.emails')
+})
+
+// just in case
 window.addEventListener('load', () => {
-    console.log('load')
+    console.log('Loaded')
     if (checkSearch()) {
         authSelect.style.display = 'none'
         setTips(tipArea, '請使用已加入課程的帳號進行登入點名！')
@@ -27,6 +40,9 @@ window.addEventListener('load', () => {
         google.addScope('https://www.googleapis.com/auth/classroom.profile.emails')
     }
     // window.sessionStorage.clear()
+    if (window.sessionStorage.getItem('token')) {
+        window.sessionStorage.removeItem('token')
+    }
 })
 
 // log in button
