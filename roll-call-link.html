@@ -49,12 +49,13 @@
             // This url is for your index.html in ONE folder in your server. e.g. google.com/folder/index.html
             const url = 'http://' + window.location.host + '/' + window.location.pathname.split('/')[1] + '/?'
             let data = url + qrcodeHref[0] + '-' + qrcodeHref[1] + '-' + qrcodeHref[2]
-            let theWidth = window.innerWidth - 50
-            if (theWidth > 990) {
-                theWidth = 990
-            } else if (theWidth < 100) {
-                theWidth = 100
-            }
+            let theWidth = 250
+            // let theWidth = window.innerWidth - 100
+            // if (theWidth > 700) {
+            //     theWidth = 400
+            // } else if (theWidth < 300) {
+            //     theWidth = 200
+            // }
             const size = String(theWidth) + 'x' + String(theWidth)
             const api = baseUrl + 'data=' + data + "&size=" + size
             href.value = data
