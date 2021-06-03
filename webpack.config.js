@@ -7,7 +7,7 @@ module.exports = {
         classlist: './srcJs/classlist.js',
         classStudentList: './srcJs/classStudentList.js',
         css: './srcJs/style.js',
-        rollcall: './srcJs/rollcall.js'
+        rollcall: './srcJs/rollcall.js',
     },
     output: {
         filename: '[name].js',

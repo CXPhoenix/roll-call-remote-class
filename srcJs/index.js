@@ -16,25 +16,28 @@ const google = new auth.GoogleAuthProvider
 // google.addScope('https://www.googleapis.com/auth/classroom.profile.emails')
 
 // on load event
-window.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM Loaded')
-    console.log(checkSearch())
-    if (checkSearch()) {
-        authSelect.style.display = 'none'
-        setTips(tipArea, '請使用已加入課程的帳號進行登入點名！')
-        return
-    }
-    google.addScope('https://www.googleapis.com/auth/classroom.courses.readonly')
-    google.addScope('https://www.googleapis.com/auth/classroom.rosters.readonly')
-    google.addScope('https://www.googleapis.com/auth/classroom.profile.emails')
-})
+// window.addEventListener('DOMContentLoaded', () => {
+//     console.log('DOM Loaded')
+//     console.log(checkSearch())
+//     if (checkSearch()) {
+//         authSelect.style.display = 'none'
+//         setTips(tipArea, '請使用已加入課程的帳號進行登入點名！')
+//         return
+//     }
+//     google.addScope('https://www.googleapis.com/auth/classroom.courses.readonly')
+//     google.addScope('https://www.googleapis.com/auth/classroom.rosters.readonly')
+//     google.addScope('https://www.googleapis.com/auth/classroom.profile.emails')
+//     if (window.sessionStorage.getItem('token')) {
+//         window.sessionStorage.removeItem('token')
+//     }
+// })
 
 // just in case
 window.addEventListener('load', () => {
     console.log('Loaded')
     if (checkSearch()) {
         authSelect.style.display = 'none'
-        // setTips(tipArea, '請使用已加入課程的帳號進行登入點名！')
+        setTips(tipArea, '請使用已加入課程的帳號進行登入點名！')
     } else {
         google.addScope('https://www.googleapis.com/auth/classroom.courses.readonly')
         google.addScope('https://www.googleapis.com/auth/classroom.rosters.readonly')
@@ -74,6 +77,7 @@ function GoogleLogin(page) {
 }
 
 function checkSearch() {
+    console.log(window.location.search)
     if (window.location.search) {
         return true
     }
@@ -82,6 +86,7 @@ function checkSearch() {
 
 function storageSearch(urlSearch) {
     urlSearch = urlSearch.split('?')[1].split('-')
+    console.log(urlSearch)
     const rollCallCourse = urlSearch[0]
     const rollCallTimestamp = urlSearch[1]
     const state = urlSearch[2]
