@@ -26,6 +26,7 @@ const courseId = window.sessionStorage.getItem('courseId')
 let state = false
 let lastRollCall = null
 let rollCallList = ['studentId']
+let studentList = null
 getState(courseId)
 
 // onload events
@@ -69,22 +70,29 @@ app.auth().onAuthStateChanged((user) => {
         window.location.replace('./index.html')
     }
     console.log(user.displayName + ' in the course ' + window.sessionStorage.getItem('courseName'))
+    studentList = []
     getStudentList()
 })
 
 // build students' list area
-// from getStudentList() CustomEvent
+// from getStudentList() and getNextPageStudents CustomEvent
 studentListArea.addEventListener('getList', (e) => {
+    console.log(studentList)
     loader.style.display = 'none'
     lastRollCallTimeArea.style.display = 'block'
-    const students = e.detail.students
+    const students = studentList
     students.sort(function (a, b) {
         return a.profile.name.familyName - b.profile.name.familyName
     })
-    e.detail.students.forEach((student) => {
-        // console.log(student)
+    students.forEach((student) => {
+        console.log(student)
         studentListArea.appendChild(buildSpan(student.userId, student.profile.name.fullName, student.profile.emailAddress))
     })
+})
+
+// from getStudentList() and getNextPageStudents if(res.data.nextPageToken)
+studentListArea.addEventListener('getNext', (e) => {
+    getNextPageStudents(e.detail.nextPageToken)
 })
 
 // from getRollCallState() Custom Event
@@ -185,7 +193,7 @@ function getRollCallState(courseId, timestamp) {
 
 function getStudentList() {
     axios({
-        url: 'https://classroom.googleapis.com/v1/courses/' + window.sessionStorage.getItem('courseId') + '/students?key=' + apiKey,
+        url: 'https://classroom.googleapis.com/v1/courses/' + window.sessionStorage.getItem('courseId') + '/students?pageSize=100&key=' + apiKey,
         headers: {
             Authorization: "Bearer " + window.sessionStorage.getItem('token'),
             Accept: "application/json"
@@ -200,11 +208,42 @@ function getStudentList() {
             studentListArea.appendChild(noStudent())
             return
         }
-        studentListArea.dispatchEvent(new CustomEvent('getList', {
-            detail: {
-                students: res.data.students
-            }
-        }))
+        studentList.push(...res.data.students)
+        if (res.data.nextPageToken) {
+            studentListArea.dispatchEvent(new CustomEvent('getNext', {
+                detail: {
+                    nextPageToken: res.data.nextPageToken
+                }
+            }))
+            return
+        }
+        studentListArea.dispatchEvent(new CustomEvent('getList'))
+    }).catch(function (error) {
+        console.log(error)
+        alert('出現了一點問題，請試著重新登入')
+        window.location.replace('./index.html')
+    })
+}
+
+function getNextPageStudents(theNextPageToken) {
+    console.log('nextPageList')
+    axios({
+        url: 'https://classroom.googleapis.com/v1/courses/' + window.sessionStorage.getItem('courseId') + '/students?pageSize=30&pageToken=' + theNextPageToken + '&key=' + apiKey,
+        headers: {
+            Authorization: "Bearer " + window.sessionStorage.getItem('token'),
+            Accept: "application/json"
+        }
+    }).then(function (res) {
+        studentList.push(...res.data.students)
+        if (res.data.nextPageToken) {
+            studentListArea.dispatchEvent(new CustomEvent('getNext', {
+                detail: {
+                    nextPageToken: res.data.nextPageToken
+                }
+            }))
+        } else {
+            studentListArea.dispatchEvent(new CustomEvent('getList'))
+        }
     }).catch(function (error) {
         console.log(error)
         alert('出現了一點問題，請試著重新登入')

@@ -53,7 +53,7 @@ logoutbtn.addEventListener('click', logout)
 // functions
 function getClassList(key) {
     axios({
-        url: 'https://classroom.googleapis.com/v1/courses?teacherId=me&key=' + key,
+        url: 'https://classroom.googleapis.com/v1/courses?pageSize=100&teacherId=me&key=' + key,
         headers: {
             Authorization: 'Bearer ' + window.sessionStorage.getItem('token'),
             Accept: 'application/json'
@@ -64,6 +64,7 @@ function getClassList(key) {
             courseListArea.appendChild(noCourse())
             return
         }
+        // console.log(Array.from(res.data.courses).length)
         courseListArea.dispatchEvent(new CustomEvent('getList', {
             detail: {
                 courses: res.data.courses
