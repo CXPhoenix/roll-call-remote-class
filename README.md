@@ -4,7 +4,7 @@
 ## Description
 #### The project develop for remote education using firebase service.
 
-* version: 2.2.1
+* version: 2.2.3
 * Licence: GNU GENERAL PUBLIC LICENSE v3.0
 
 ## Project Setting

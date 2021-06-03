@@ -18,6 +18,7 @@ const google = new auth.GoogleAuthProvider
 // on load event
 window.addEventListener('DOMContentLoaded', () => {
     console.log('DOM Loaded')
+    console.log(checkSearch())
     if (checkSearch()) {
         authSelect.style.display = 'none'
         setTips(tipArea, '請使用已加入課程的帳號進行登入點名！')
@@ -33,7 +34,7 @@ window.addEventListener('load', () => {
     console.log('Loaded')
     if (checkSearch()) {
         authSelect.style.display = 'none'
-        setTips(tipArea, '請使用已加入課程的帳號進行登入點名！')
+        // setTips(tipArea, '請使用已加入課程的帳號進行登入點名！')
     } else {
         google.addScope('https://www.googleapis.com/auth/classroom.courses.readonly')
         google.addScope('https://www.googleapis.com/auth/classroom.rosters.readonly')
