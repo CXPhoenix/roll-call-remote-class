@@ -1,4 +1,4 @@
-import { db } from './firebase.config.js'
+import { app, db, dbFieldValue } from './firebase.config.js'
 
 const collection = 'CourseRollCall'
 
@@ -29,6 +29,13 @@ export function setLastRollCall(courseId, timestamp) {
         lastRollCall: timestamp,
     }, {
         merge: true
+    })
+}
+
+export function updateRollCallLog(courseId, timestamp) {
+    const dbRef = db.collection(collection).doc(courseId)
+    dbRef.update({
+        rollCallLog: dbFieldValue.arrayUnion(timestamp),
     })
 }
 

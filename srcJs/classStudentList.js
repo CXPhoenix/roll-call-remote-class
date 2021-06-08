@@ -6,7 +6,8 @@ import {
 import axios from 'axios'
 import {
     createRollCall,
-    setLastRollCall
+    setLastRollCall,
+    updateRollCallLog,
 } from './functions/database.js'
 
 // init page elements
@@ -143,6 +144,7 @@ courseStart.addEventListener('click', function () {
             const path = './roll-call-link.html?' + urlKey(true, timeStamp)
             // setCourseState(courseId, true)
             setLastRollCall(courseId, timeStamp)
+            updateRollCallLog(courseId, timeStamp)
             createRollCall(window.sessionStorage.getItem('courseId'), timeStamp, parseInt(rollCallTimeOut.value))
             window.open(path, '_blank')
             // courseStart.classList.add('disabled')
