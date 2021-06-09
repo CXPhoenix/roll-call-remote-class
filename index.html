@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <title>點名系統</title>
+</head>
+
+<body>
+    <header class="bg-primary mb-4">
+        <div class="container text-center p-3">
+            <span class="text-white display-3 fw-bold">電子點名系統<span class="badge bg-secondary" style="font-size: 1vw;">beta</span></span>
+        </div>
+    </header>
+
+    <section>
+        <div class="container" style="margin-top: 18vh;">
+            <select id="authSelect" class="mx-auto form-select" style="max-width: 200px; width: 55vw;" aria-label="Default select example">
+                <option>請問你的身份？</option>
+                <option value="./classlist.html" selected>老師</option>
+                <option value="./student.html">學生</option>
+            </select>
+            <div id="tips"></div>
+            <div id="isLogin" class="text-center mt-4">
+                <button id="login" class="btn btn-outline-light text-dark  shadow p-3"><span class="fs-2"><img src="./assets/google.svg" style="max-width: 40px; width: 15vw;" />&nbsp;&nbsp;使用 Google 登入</span></button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-light fixed-bottom mt-5">
+        <div class="container text-center p-1">
+            <span>Power By FHSH IT dept.</span>
+        </div>
+    </footer>
+
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

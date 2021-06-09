@@ -1,24 +1,27 @@
 const path = require('path')
+const { LoaderOptionsPlugin } = require('webpack')
 
 module.exports = {
     entry: {
-        teacherApp: './src/teacherIndex.js',
-        studentApp: './src/studentIndex.js',
-        style: './src/css.js',
+        index: './srcJs/index.js',
+        classlist: './srcJs/classlist.js',
+        classStudentList: './srcJs/classStudentList.js',
+        css: './srcJs/style.js',
+        rollcall: './srcJs/rollcall.js',
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'public', 'js')
+        path: path.resolve(__dirname,'js')
     },
     module: {
-        rules:[
+        rules: [
             {
                 test: /\.css/,
                 use: [
-                    'style-loader',
-                    'css-loader',
+                    'style-Loader',
+                    'css-loader'
                 ]
             }
-        ],
+        ]
     }
 }

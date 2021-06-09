@@ -1,31 +1,31 @@
 {
-  "name": "rollcall",
+  "name": "testfirebase",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-js:dev": "webpack --mode development",
-    "build-js:dev-watch": "webpack --mode development --watch",
-    "build-js": "webpack --mode production"
+    "build-dev": "webpack --mode development",
+    "build-dev:watch": "webpack --mode development --watch",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "css-loader": "^5.2.4",
-    "style-loader": "^2.0.0",
-    "webpack": "^5.37.1",
-    "webpack-cli": "^4.7.0"
-  },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
     "@fortawesome/fontawesome-free-regular": "^5.0.13",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
-    "@popperjs/core": "^2.9.2",
+    "aos": "^2.3.4",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.0-beta3",
-    "firebase": "^8.6.1"
+    "firebase": "^8.6.2"
+  },
+  "devDependencies": {
+    "css-loader": "^5.2.6",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0"
   }
 }

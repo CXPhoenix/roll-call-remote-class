@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>課程點名用QRcode</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+<body>
+    <header class="bg-primary mb-4">
+        <div class="container text-center p-3">
+            <span class="text-white display-3 fw-bold">電子點名系統<span class="badge bg-secondary" style="font-size: 1vw;">beta</span></span>
+        </div>
+    </header>
+
+    <section class="mb-5">
+        <div class="container text-center">
+            <span class="fs-4 mb-2">請讓學生掃描下方 QR code 或是 複製下方連結傳給學生進行點名</span>
+            <div class="mx-auto mt-5">
+                <img id="rollcall" src="#" alt="" />
+            </div>
+            <div class="w-50 mx-auto" style="margin-top: 5vh">
+                <div class="input-group mb-3">
+                    <input id="href" type="text" class="form-control" value="#" readonly/>
+                    <button class="btn btn-outline-dark" type="button" id="copy">複製&nbsp;&nbsp;<i class="far fa-copy"></i></button>
+                  </div>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-light fixed-bottom mt-5">
+        <div class="container text-center p-1">
+            <span style="font-size: 1vw;">Power By FHSH IT-dept.</span>
+        </div>
+    </footer>
+    <script src="./js/css.js"></script>
+    <script>
+        const href = document.querySelector('#href')
+        const copyBtn = document.querySelector('#copy')
+        const qrcode = document.querySelector('#rollcall')
+        copyBtn.addEventListener('click', () => {
+            copyText(href)
+        })
+        window.addEventListener('load', () => {
+            // now I use the qrcode generator api
+            // need to change to the local generator
+            const qrcodeHref = window.location.search.split('?')[1].split('-')
+            const baseUrl = 'http://api.qrserver.com/v1/create-qr-code/?'
+            // This url is for your index.html in ONE folder in your server. e.g. google.com/folder/index.html
+            const url = 'http://' + window.location.host + '/' + window.location.pathname.split('/')[1] + '/?'
+            let data = url + qrcodeHref[0] + '-' + qrcodeHref[1] + '-' + qrcodeHref[2]
+            let theWidth = 250
+            // let theWidth = window.innerWidth - 100
+            // if (theWidth > 700) {
+            //     theWidth = 400
+            // } else if (theWidth < 300) {
+            //     theWidth = 200
+            // }
+            const size = String(theWidth) + 'x' + String(theWidth)
+            const api = baseUrl + 'data=' + data + "&size=" + size
+            href.value = data
+            qrcode.src = api
+        })
+
+        //use navigator clipboard
+        function copyToClipboard(inputElement) {
+            const text = inputElement.value
+            navigator.clipboard.writeText(text).then(() => {
+                navigator.clipboard.readText().then((text) => {
+                    if (text === href.value) {
+                        copyBtn.classList.add('btn-success')
+                        copyBtn.classList.remove('btn-outline-secondary')
+                        copyBtn.classList.add('text-white')
+                        copyBtn.innerHTML = '複製成功&nbsp;&nbsp;<i class="fas fa-copy"></i>'
+                    }
+                })
+            })
+        }
+
+        // use the old, obsolete feature: document.execCommand()
+        function copyText(inputElement) {
+            const range = document.createRange()
+            range.selectNode(inputElement)
+            window.getSelection().addRange(range)
+            document.execCommand('copy')
+            copyBtn.classList.add('btn-success')
+            copyBtn.classList.remove('btn-outline-secondary')
+            copyBtn.classList.add('text-white')
+            copyBtn.innerHTML = '複製成功&nbsp;&nbsp;<i class="fas fa-copy"></i>'
+        }
+    </script>
+</body>
+</html>
